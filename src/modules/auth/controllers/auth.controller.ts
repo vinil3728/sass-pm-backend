@@ -23,12 +23,48 @@ export class AuthController {
   // LOGIN
   // -------------------------
   login = async (req: Request, res: Response) => {
-    const result = await this.authService.login(req.body);
+    const result = await this.authService.login({
+      ...req.body,
+      ipAddress: req.ip,
+      userAgent: req.headers['user-agent'] || ''
+    });
 
     return res.status(200).json(
       ResponseBuilder.success(
         'Login successful',
         result
+      )
+    );
+  };
+
+  refreshToken = async (
+    req: Request,
+    res: Response
+  ) => {
+    const result =
+      await this.authService.refreshToken(
+        req.body.refreshToken
+      );
+
+    return res.status(200).json(
+      ResponseBuilder.success(
+        'Token refreshed successfully',
+        result
+      )
+    );
+  };
+
+  logout = async (
+    req: Request,
+    res: Response
+  ) => {
+    await this.authService.logout(
+      req.body.refreshToken
+    );
+
+    return res.status(200).json(
+      ResponseBuilder.success(
+        'Logged out successfully'
       )
     );
   };

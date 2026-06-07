@@ -16,4 +16,43 @@ export class RefreshTokenRepository {
             },
         });
     }
+
+    async revoke(id: string): Promise<void> {
+        await RefreshToken.update(
+            {
+                revokedAt: new Date(),
+            },
+            {
+                where: {
+                    id,
+                },
+            }
+        );
+    }
+
+    async findActiveToken(
+        tokenHash: string
+    ): Promise<RefreshToken | null> {
+        return RefreshToken.findOne({
+            where: {
+                tokenHash,
+                revokedAt: null,
+            },
+        });
+    }
+
+    async revokeBySessionId(
+        sessionId: string
+    ): Promise<void> {
+        await RefreshToken.update(
+            {
+                revokedAt: new Date(),
+            },
+            {
+                where: {
+                    sessionId,
+                },
+            }
+        );
+    }
 }

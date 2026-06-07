@@ -13,7 +13,7 @@ const PORT = process.env['PORT'] || 3000;
 
     await sequelize.authenticate();
 
-    await sequelize.sync({ force: true });
+    // await sequelize.sync({ force: true });
 
     console.log('Database Connected');
 

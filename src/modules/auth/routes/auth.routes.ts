@@ -4,6 +4,8 @@ import { validationMiddleware } from '../../../shared/middleware/validation.midd
 
 import { RegisterDto } from '../dto/request/register.dto';
 import { LoginDto } from '../dto/request/login.dto';
+import { RefreshTokenDto } from '../dto/request/refresh-token.dto';
+import { LogoutDto } from '../dto/request/logout.dto';
 
 const router = Router();
 const controller = new AuthController();
@@ -21,5 +23,22 @@ router.post(
   validationMiddleware(LoginDto),
   controller.login
 );
+
+router.post(
+  '/refresh-token',
+  validationMiddleware(
+    RefreshTokenDto
+  ),
+  controller.refreshToken
+);
+
+router.post(
+  '/logout',
+  validationMiddleware(
+    LogoutDto
+  ),
+  controller.logout
+);
+
 
 export default router;
