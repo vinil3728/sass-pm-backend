@@ -1,5 +1,5 @@
 import jwt, { Secret, SignOptions } from 'jsonwebtoken';
-import { JwtPayload } from '../interfaces/jwt-payload.interface';
+import { JwtPayload } from '../../interfaces/jwt-payload.interface';
 
 export class JwtUtil {
   static generateAccessToken(
