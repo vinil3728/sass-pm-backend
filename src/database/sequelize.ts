@@ -10,6 +10,9 @@ import { EmailVerification } from '../modules/auth/models/email-verification.mod
 import { PasswordReset } from '../modules/auth/models/password-reset.model';
 import { AuditLog } from '../modules/auth/models/audit-log.model';
 import { UserSession } from '../modules/auth/models/user-session.model';
+import { Organization } from '../modules/organization/models/organization.model';
+import { OrganizationMember } from '../modules/organization/models/organization-member.model';
+import { OrganizationInvitation } from '../modules/organization/models/organization-invitation.model';
 
 
 export const sequelize = new Sequelize({
@@ -30,6 +33,9 @@ export const sequelize = new Sequelize({
     RefreshToken,
     EmailVerification,
     PasswordReset,
-    AuditLog
+    AuditLog,
+    Organization,
+    OrganizationMember,
+    OrganizationInvitation
   ]
 });

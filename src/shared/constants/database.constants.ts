@@ -6,4 +6,7 @@ export const TABLE_NAMES = {
   EMAIL_VERIFICATIONS: 'email_verifications',
   PASSWORD_RESETS: 'password_resets',
   AUDIT_LOGS: 'audit_logs',
+  ORGANIZATIONS: 'organizations',
+  ORGANIZATION_MEMBERS: 'organization_members',
+  ORGANIZATION_INVITATIONS: 'organization_invitations'
 } as const;
