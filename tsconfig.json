@@ -19,11 +19,6 @@
     "declarationMap": true,
     "esModuleInterop": true,
 
-    // Style Options
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
-    "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
