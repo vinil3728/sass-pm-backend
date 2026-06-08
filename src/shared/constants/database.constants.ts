@@ -1,3 +1,5 @@
+import { Task } from "../../modules/task/models/task.model";
+
 export const TABLE_NAMES = {
   USERS: 'users',
   USER_PROFILES: 'user_profiles',
@@ -11,5 +13,9 @@ export const TABLE_NAMES = {
   ORGANIZATION_INVITATIONS: 'organization_invitations',
   PROJECTS: 'projects',
   SPRINTS: 'sprints',
-  TASKS: 'tasks'
+  TASKS: 'tasks',
+  TASK_COMMENTS: 'task_comments',
+  TASK_ACTIVITIES: 'task_activities',
+  TASK_ATTACHMENTS: 'task_attachments',
+
 } as const;

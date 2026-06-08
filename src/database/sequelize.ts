@@ -16,6 +16,8 @@ import { OrganizationInvitation } from '../modules/organization/models/organizat
 import { Project } from '../modules/project/models/project.model';
 import { Sprint } from '../modules/sprint/models/sprint.model';
 import { Task } from '../modules/task/models/task.model';
+import { TaskComment } from '../modules/task/models/task-comment.model';
+import { TaskActivity } from '../modules/task/models/task-activity.model';
 
 
 export const sequelize = new Sequelize({
@@ -42,6 +44,8 @@ export const sequelize = new Sequelize({
     OrganizationInvitation,
     Project,
     Sprint,
-    Task
+    Task,
+    TaskComment,
+    TaskActivity
   ]
 });

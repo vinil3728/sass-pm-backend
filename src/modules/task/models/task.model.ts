@@ -7,7 +7,8 @@ import {
     Default,
     AllowNull,
     ForeignKey,
-    BelongsTo
+    BelongsTo,
+    HasMany,
 } from 'sequelize-typescript';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -27,7 +28,10 @@ import { TaskPriority }
 import { TaskType }
     from '../enums/task-type.enum';
 
+import { TaskComment } from './task-comment.model'
+
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
+import { TaskActivity } from './task-activity.model';
 
 @Table({
     tableName: TABLE_NAMES.TASKS,
@@ -125,4 +129,10 @@ export class Task extends Model {
 
     @BelongsTo(() => Sprint)
     declare sprint: Sprint;
+
+    @HasMany(() => TaskComment)
+    declare comments: TaskComment[];
+
+    @HasMany(() => TaskActivity)
+    declare activities: TaskActivity[];
 }
