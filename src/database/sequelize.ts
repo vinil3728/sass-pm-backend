@@ -13,6 +13,7 @@ import { UserSession } from '../modules/auth/models/user-session.model';
 import { Organization } from '../modules/organization/models/organization.model';
 import { OrganizationMember } from '../modules/organization/models/organization-member.model';
 import { OrganizationInvitation } from '../modules/organization/models/organization-invitation.model';
+import { Project } from '../modules/project/models/project.model';
 
 
 export const sequelize = new Sequelize({
@@ -36,6 +37,7 @@ export const sequelize = new Sequelize({
     AuditLog,
     Organization,
     OrganizationMember,
-    OrganizationInvitation
+    OrganizationInvitation,
+    Project
   ]
 });

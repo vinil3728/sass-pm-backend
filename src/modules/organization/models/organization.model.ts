@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { OrganizationMember } from './organization-member.model';
 import { OrganizationInvitation } from './organization-invitation.model';
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
+import { Project } from '../../project/models/project.model';
 
 @Table({
     tableName: TABLE_NAMES.ORGANIZATIONS,
@@ -51,4 +52,7 @@ export class Organization extends Model {
 
     @HasMany(() => OrganizationInvitation)
     declare invitations: OrganizationInvitation[];
+
+    @HasMany(() => Project)
+    declare projects: Project[];
 }
