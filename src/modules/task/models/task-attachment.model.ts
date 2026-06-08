@@ -13,9 +13,10 @@ import { v4 as uuidv4 }
 
 import { Task }
     from './task.model';
+import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 
 @Table({
-    tableName: 'task_attachments',
+    tableName: TABLE_NAMES.TASK_ATTACHMENTS,
     timestamps: true,
     paranoid: true,
 })
