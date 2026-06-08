@@ -1,26 +1,26 @@
 import { Router }
-    from 'express';
+  from 'express';
 
 import { TaskController }
-    from '../controllers/task.controller';
+  from '../controllers/task.controller';
 
 import { authMiddleware }
-    from '../../../shared/middleware/auth.middleware';
+  from '../../../shared/middleware/auth.middleware';
 
 import { projectAccess }
-    from '../../project/middleware/project-access.middleware';
+  from '../../project/middleware/project-access.middleware';
 
 import { requireRole }
-    from '../../organization/middlewares/require-role.middleware';
+  from '../../organization/middlewares/require-role.middleware';
 
 import { OrganizationRole }
-    from '../../organization/enums/organization-role.enum';
+  from '../../organization/enums/organization-role.enum';
 
 import { validationMiddleware }
-    from '../../../shared/middleware/validation.middleware';
+  from '../../../shared/middleware/validation.middleware';
 
 import { CreateTaskDto }
-    from '../dto/request/create-task.dto';
+  from '../dto/request/create-task.dto';
 
 import { taskAccess } from '../middleware/task-access.middleware';
 
@@ -28,29 +28,39 @@ import { UpdateTaskStatusDto } from '../dto/request/update-task-status.dto';
 
 import { AssignTaskDto } from '../dto/request/assign-task.dto';
 
+import { TaskAttachmentController } from '../controllers/task-attachment.controller';
+
+import {
+  upload
+} from '../../../shared/config/multer.config';
+
+
 const router = Router();
 
 const controller =
-    new TaskController();
+  new TaskController();
+
+const Taskcontroller =
+  new TaskAttachmentController();
 
 router.post(
-    '/projects/:projectId/tasks',
+  '/projects/:projectId/tasks',
 
-    authMiddleware,
+  authMiddleware,
 
-    projectAccess,
+  projectAccess,
 
-    requireRole([
-        OrganizationRole.OWNER,
-        OrganizationRole.ADMIN,
-        OrganizationRole.MEMBER
-    ]),
+  requireRole([
+    OrganizationRole.OWNER,
+    OrganizationRole.ADMIN,
+    OrganizationRole.MEMBER
+  ]),
 
-    validationMiddleware(
-        CreateTaskDto
-    ),
+  validationMiddleware(
+    CreateTaskDto
+  ),
 
-    controller.createTask
+  controller.createTask
 );
 
 router.get(
@@ -149,6 +159,38 @@ router.get(
   projectAccess,
 
   controller.getWorkload
+);
+
+router.post(
+  '/tasks/:taskId/attachments',
+
+  authMiddleware,
+
+  taskAccess,
+
+  upload.single('file'),
+
+  Taskcontroller.uploadAttachment
+);
+
+router.get(
+  '/tasks/:taskId/attachments',
+
+  authMiddleware,
+
+  taskAccess,
+
+  Taskcontroller.getAttachments
+);
+
+router.delete(
+  '/tasks/:taskId/attachments/:attachmentId',
+
+  authMiddleware,
+
+  taskAccess,
+
+  Taskcontroller.deleteAttachment
 );
 
 export default router;

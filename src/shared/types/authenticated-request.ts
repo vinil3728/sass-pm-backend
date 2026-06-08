@@ -25,4 +25,6 @@ export interface AuthenticatedRequest
     sprint?: Sprint;
 
     task?: Task;
+
+    file?: Express.Multer.File;
 }

@@ -24,3 +24,7 @@ Thumbs.db
 
 # Coverage
 coverage/
+
+# Storage
+storage/attachments/*
+!storage/attachments/.gitkeep

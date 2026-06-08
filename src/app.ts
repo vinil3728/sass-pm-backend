@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import path from 'path';
 
 import routes from './routes';
 import { errorHandler } from './shared/middleware/error-handler';
@@ -23,6 +24,17 @@ app.use('/api/organizations', organizationRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', sprintRoutes);
 app.use('/api', taskRoutes);
+
+app.use(
+    '/uploads',
+
+    express.static(
+        path.join(
+            process.cwd(),
+            'storage'
+        )
+    )
+);
 
 app.use(errorHandler);
 

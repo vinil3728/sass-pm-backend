@@ -32,6 +32,7 @@ import { TaskComment } from './task-comment.model'
 
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 import { TaskActivity } from './task-activity.model';
+import { TaskAttachment } from './task-attachment.model';
 
 @Table({
     tableName: TABLE_NAMES.TASKS,
@@ -135,4 +136,10 @@ export class Task extends Model {
 
     @HasMany(() => TaskActivity)
     declare activities: TaskActivity[];
+
+    @HasMany(
+        () => TaskAttachment
+    )
+    declare attachments:
+        TaskAttachment[];
 }
