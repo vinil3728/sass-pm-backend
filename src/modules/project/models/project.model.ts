@@ -19,6 +19,7 @@ import { Organization }
 import { ProjectStatus }
     from '../../project/enums/project-status.enum'
 import { Sprint } from '../../sprint/models/sprint.model';
+import { Task } from '../../task/models/task.model';
 
 @Table({
     tableName: 'projects',
@@ -78,4 +79,7 @@ export class Project extends Model {
 
     @HasMany(() => Sprint)
     declare sprints: Sprint[];
+
+    @HasMany(() => Task)
+    declare tasks: Task[];
 }
