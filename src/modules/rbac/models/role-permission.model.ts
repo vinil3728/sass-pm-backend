@@ -5,7 +5,8 @@ import {
     DataType,
     PrimaryKey,
     Default,
-    ForeignKey
+    ForeignKey,
+    BelongsTo
 } from 'sequelize-typescript';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -32,4 +33,10 @@ export class RolePermission extends Model {
     @ForeignKey(() => Permission)
     @Column(DataType.UUID)
     declare permissionId: string;
+
+    @BelongsTo(() => Role)
+    declare role: Role;
+
+    @BelongsTo(() => Permission)
+    declare permission: Permission;
 }

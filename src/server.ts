@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import app from './app';
 import { sequelize } from './database/sequelize';
 import http from 'http';
+import {
+  seedRbac
+} from './modules/rbac/seeds/seed-rbac';
 
 import {
   initializeSocket
@@ -26,6 +29,8 @@ initializeSocket(
     await sequelize.authenticate();
 
     await sequelize.sync({ alter: true });
+
+    await seedRbac();
 
     console.log('Database Connected');
 

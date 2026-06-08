@@ -6,6 +6,7 @@ import {
     PrimaryKey,
     Default,
     ForeignKey,
+    BelongsTo
 } from 'sequelize-typescript';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -35,4 +36,10 @@ export class OrganizationMemberRole extends Model {
     @ForeignKey(() => Role)
     @Column(DataType.UUID)
     declare roleId: string;
+
+    @BelongsTo(() => OrganizationMember)
+    declare organizationMember: OrganizationMember;
+
+    @BelongsTo(() => Role)
+    declare role: Role;
 }

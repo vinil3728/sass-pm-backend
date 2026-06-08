@@ -14,6 +14,7 @@ import projectTeamRoutes from './modules/project/routes/project-team.routes';
 import sprintRoutes from './modules/sprint/routes/sprint.routes';
 import taskRoutes from './modules/task/routes/task.routes';
 import notificationRoutes from './modules/notification/routes/notification.routes';
+import rbacRoutes from './modules/rbac/routes/rbac.routes';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api', projectTeamRoutes);
 app.use('/api', sprintRoutes);
 app.use('/api', taskRoutes);
 app.use('/api', notificationRoutes);
+app.use('/api', rbacRoutes);
 
 app.use(
     '/uploads',
