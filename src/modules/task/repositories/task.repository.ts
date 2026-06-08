@@ -1,5 +1,9 @@
+import { GetTasksQueryDto } from '../dto/request/get-tasks-query.dto';
 import { TaskStatus } from '../enums/task-status.enum';
 import { Task } from '../models/task.model';
+import {
+    Op
+} from 'sequelize';
 
 export class TaskRepository {
 
@@ -157,5 +161,72 @@ export class TaskRepository {
                 projectId,
             },
         });
+    }
+
+    async searchTasks(
+        projectId: string,
+        query: GetTasksQueryDto
+    ) {
+
+        const where: any = {
+            projectId,
+        };
+
+        if (query.search) {
+
+            where[Op.or] = [
+                {
+                    title: {
+                        [Op.like]:
+                            `%${query.search}%`,
+                    },
+                },
+                {
+                    taskKey: {
+                        [Op.like]:
+                            `%${query.search}%`,
+                    },
+                },
+            ];
+        }
+
+        if (query.status) {
+            where.status =
+                query.status;
+        }
+
+        if (query.priority) {
+            where.priority =
+                query.priority;
+        }
+
+        if (query.assigneeId) {
+            where.assigneeId =
+                query.assigneeId;
+        }
+
+        const offset =
+            (query.page - 1)
+            * query.limit;
+
+        const result =
+            await Task.findAndCountAll({
+
+                where,
+
+                offset,
+
+                limit:
+                    query.limit,
+
+                order: [
+                    [
+                        query.sortBy,
+                        query.sortOrder,
+                    ],
+                ],
+            });
+
+        return result;
     }
 }

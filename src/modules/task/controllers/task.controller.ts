@@ -23,7 +23,7 @@ export class TaskController {
                 req.user!.userId,
                 req.body
             );
-        
+
         return res.status(201).json({
             success: true,
             data: result,
@@ -36,14 +36,17 @@ export class TaskController {
     ) => {
 
         const result =
-            await this.taskService.getTasks(
-                req.params.projectId as string
-            );
+            await this.taskService
+                .getTasks(
+                    req.params.projectId as string,
+                    req.query as any
+                );
 
-        return res.status(200).json({
-            success: true,
-            data: result,
-        });
+        return res.status(200)
+            .json({
+                success: true,
+                data: result,
+            });
     };
 
     getTask = async (

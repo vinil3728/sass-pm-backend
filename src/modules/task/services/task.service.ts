@@ -1,6 +1,7 @@
 import { OrganizationMemberRepository } from '../../organization/repositories/organization-member.repository';
 import { ProjectRepository } from '../../project/repositories/project.repository';
 import { CreateTaskDto } from '../dto/request/create-task.dto';
+import { GetTasksQueryDto } from '../dto/request/get-tasks-query.dto';
 import { TaskStatus } from '../enums/task-status.enum';
 import { TaskRepository } from '../repositories/task.repository';
 import { TaskStatusTransition } from '../utils/task-status-transition';
@@ -79,18 +80,42 @@ export class TaskService {
                 project
             );
 
-        
+
         return task;
     }
 
     async getTasks(
-        projectId: string
+        projectId: string,
+        query: GetTasksQueryDto
     ) {
 
-        return this.taskRepository
-            .findByProjectId(
-                projectId
-            );
+        const result =
+            await this.taskRepository
+                .searchTasks(
+                    projectId,
+                    query
+                );
+
+        return {
+
+            items:
+                result.rows,
+
+            page:
+                query.page,
+
+            limit:
+                query.limit,
+
+            totalItems:
+                result.count,
+
+            totalPages:
+                Math.ceil(
+                    result.count /
+                    query.limit
+                ),
+        };
     }
 
     async getTask(
