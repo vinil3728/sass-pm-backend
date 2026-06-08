@@ -83,4 +83,10 @@ export class Project extends Model {
 
     @HasMany(() => Task)
     declare tasks: Task[];
+
+    @Column({
+        type: DataType.INTEGER,
+        defaultValue: 0,
+    })
+    declare nextTaskNumber: number;
 }

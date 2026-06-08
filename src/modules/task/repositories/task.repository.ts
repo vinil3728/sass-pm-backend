@@ -27,4 +27,61 @@ export class TaskRepository {
             ],
         });
     }
+
+    async findByProjectId(
+        projectId: string
+    ): Promise<Task[]> {
+
+        return Task.findAll({
+            where: {
+                projectId,
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ],
+        });
+    }
+
+    async findWithRelations(
+        taskId: string
+    ): Promise<Task | null> {
+
+        return Task.findByPk(taskId, {
+            include: [
+                {
+                    association: 'project',
+                },
+                {
+                    association: 'sprint',
+                },
+            ],
+        });
+    }
+
+    async findKanbanTasks(
+        projectId: string
+    ): Promise<Task[]> {
+
+        return Task.findAll({
+            where: {
+                projectId,
+            },
+            order: [
+                ['taskNumber', 'ASC']
+            ],
+        });
+    }
+
+    async findTaskWithProject(
+        taskId: string
+    ): Promise<Task | null> {
+
+        return Task.findByPk(taskId, {
+            include: [
+                {
+                    association: 'project',
+                },
+            ],
+        });
+    }
 }

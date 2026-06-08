@@ -1,6 +1,7 @@
 import { Project } from '../models/project.model';
 
 export class ProjectRepository {
+    
     async create(
         data: Partial<Project>
     ): Promise<Project> {
@@ -54,5 +55,14 @@ export class ProjectRepository {
         projectId: string
     ): Promise<Project | null> {
         return Project.findByPk(projectId);
+    }
+
+    async incrementTaskNumber(
+        project: Project
+    ): Promise<void> {
+
+        project.nextTaskNumber += 1;
+
+        await project.save();
     }
 }

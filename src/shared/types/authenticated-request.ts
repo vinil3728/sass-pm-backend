@@ -8,6 +8,8 @@ import { OrganizationMember }
 
 import { Sprint } from '../../modules/sprint/models/sprint.model';
 
+import { Task } from '../../modules/task/models/task.model';
+
 export interface AuthenticatedRequest
     extends Request {
 
@@ -21,4 +23,6 @@ export interface AuthenticatedRequest
     project?: Project;
 
     sprint?: Sprint;
+
+    task?: Task;
 }
