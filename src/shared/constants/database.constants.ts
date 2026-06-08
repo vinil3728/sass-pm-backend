@@ -20,5 +20,9 @@ export const TABLE_NAMES = {
   NOTIFICATIONS: 'notifications',
   TEAMS: 'teams',
   TEAM_MEMBERS: 'team_members',
-  PROJECT_TEAMS: 'project_teams'
+  PROJECT_TEAMS: 'project_teams',
+  ROLES: 'roles',
+  PERMISSIONS: 'permissions',
+  ROLE_PERMISSIONS: 'role_permissions',
+  ORGANIZATION_MEMBER_ROLES: 'organization_member_roles',
 } as const;

@@ -23,6 +23,10 @@ import { Notification } from '../modules/notification/models/notification.model'
 import { Team } from '../modules/team/models/team.model';
 import { TeamMember } from '../modules/team/models/team-member.model'
 import { ProjectTeam } from '../modules/project/models/project-team.model';
+import { Role } from '../modules/rbac/models/role.model';
+import { Permission } from '../modules/rbac/models/permission.model';
+import { RolePermission } from '../modules/rbac/models/role-permission.model';
+import { OrganizationMemberRole } from '../modules/rbac/models/organization-member-role.model';
 
 export const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -55,6 +59,10 @@ export const sequelize = new Sequelize({
     Notification,
     Team,
     TeamMember,
-    ProjectTeam
+    ProjectTeam,
+    Role,
+    Permission,
+    RolePermission,
+    OrganizationMemberRole,
   ]
 });

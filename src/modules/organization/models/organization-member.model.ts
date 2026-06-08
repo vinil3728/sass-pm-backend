@@ -7,13 +7,15 @@ import {
     Default,
     AllowNull,
     ForeignKey,
-    BelongsTo
+    BelongsTo,
+    HasMany
 } from 'sequelize-typescript';
 
 import { v4 as uuidv4 } from 'uuid';
 
 import { Organization } from './organization.model';
 import { User } from '../../auth/models/user.model';
+import { OrganizationMemberRole } from '../../rbac/models/organization-member-role.model';
 
 import { OrganizationRole } from '../enums/organization-role.enum';
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
@@ -56,4 +58,7 @@ export class OrganizationMember extends Model {
 
     @BelongsTo(() => User)
     declare user: User;
+
+    @HasMany(() => OrganizationMemberRole)
+    declare memberRoles: OrganizationMemberRole[];
 }
