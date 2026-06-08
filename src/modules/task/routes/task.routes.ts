@@ -21,8 +21,12 @@ import { validationMiddleware }
 
 import { CreateTaskDto }
     from '../dto/request/create-task.dto';
+
 import { taskAccess } from '../middleware/task-access.middleware';
+
 import { UpdateTaskStatusDto } from '../dto/request/update-task-status.dto';
+
+import { AssignTaskDto } from '../dto/request/assign-task.dto';
 
 const router = Router();
 
@@ -91,6 +95,60 @@ router.patch(
   ),
 
   controller.updateStatus
+);
+
+router.patch(
+  '/tasks/:taskId/assign',
+
+  authMiddleware,
+
+  taskAccess,
+
+  requireRole([
+    OrganizationRole.OWNER,
+    OrganizationRole.ADMIN,
+    OrganizationRole.MEMBER,
+  ]),
+
+  validationMiddleware(
+    AssignTaskDto
+  ),
+
+  controller.assignTask
+);
+
+router.patch(
+  '/tasks/:taskId/unassign',
+
+  authMiddleware,
+
+  taskAccess,
+
+  requireRole([
+    OrganizationRole.OWNER,
+    OrganizationRole.ADMIN,
+    OrganizationRole.MEMBER,
+  ]),
+
+  controller.unassignTask
+);
+
+router.get(
+  '/users/me/tasks',
+
+  authMiddleware,
+
+  controller.getMyTasks
+);
+
+router.get(
+  '/projects/:projectId/workload',
+
+  authMiddleware,
+
+  projectAccess,
+
+  controller.getWorkload
 );
 
 export default router;

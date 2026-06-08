@@ -96,4 +96,73 @@ export class TaskController {
             data: result,
         });
     };
+
+    assignTask = async (
+        req: AuthenticatedRequest,
+        res: Response
+    ) => {
+
+        const result =
+            await this.taskService
+                .assignTask(
+                    req.params.taskId as string,
+                    req.body.userId
+                );
+
+        return res.status(200).json({
+            success: true,
+            data: result,
+        });
+    };
+
+    unassignTask = async (
+        req: AuthenticatedRequest,
+        res: Response
+    ) => {
+
+        const result =
+            await this.taskService
+                .unassignTask(
+                    req.params.taskId as string
+                );
+
+        return res.status(200).json({
+            success: true,
+            data: result,
+        });
+    };
+
+    getMyTasks = async (
+        req: AuthenticatedRequest,
+        res: Response
+    ) => {
+
+        const result =
+            await this.taskService
+                .getMyTasks(
+                    req.user!.userId
+                );
+
+        return res.status(200).json({
+            success: true,
+            data: result,
+        });
+    };
+
+    getWorkload = async (
+        req: AuthenticatedRequest,
+        res: Response
+    ) => {
+
+        const result =
+            await this.taskService
+                .getProjectWorkload(
+                    req.params.projectId as string
+                );
+
+        return res.status(200).json({
+            success: true,
+            data: result,
+        });
+    };
 }

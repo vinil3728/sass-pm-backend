@@ -1,3 +1,4 @@
+import { OrganizationMemberRepository } from '../../organization/repositories/organization-member.repository';
 import { ProjectRepository } from '../../project/repositories/project.repository';
 import { CreateTaskDto } from '../dto/request/create-task.dto';
 import { TaskStatus } from '../enums/task-status.enum';
@@ -11,7 +12,10 @@ export class TaskService {
             new TaskRepository(),
 
         private readonly projectRepository =
-            new ProjectRepository()
+            new ProjectRepository(),
+
+        private readonly memberRepository =
+            new OrganizationMemberRepository()
     ) { }
 
     async createTask(
@@ -186,5 +190,127 @@ export class TaskService {
         return {
             success: true,
         };
+    }
+
+    async assignTask(
+        taskId: string,
+        userId: string
+    ) {
+
+        const task =
+            await this.taskRepository
+                .findById(taskId);
+
+        if (!task) {
+            throw new Error(
+                'Task not found'
+            );
+        }
+
+        const member =
+            await this.memberRepository
+                .findByOrganizationAndUser(
+                    task.organizationId,
+                    userId
+                );
+
+        if (!member) {
+            throw new Error(
+                'User is not a member of this organization'
+            );
+        }
+
+        await this.taskRepository
+            .assignTask(
+                taskId,
+                userId
+            );
+
+        return {
+            success: true,
+        };
+    }
+
+    async unassignTask(
+        taskId: string
+    ) {
+
+        const task =
+            await this.taskRepository
+                .findById(taskId);
+
+        if (!task) {
+            throw new Error(
+                'Task not found'
+            );
+        }
+
+        await this.taskRepository
+            .unassignTask(
+                taskId
+            );
+
+        return {
+            success: true,
+        };
+    }
+
+    async getMyTasks(
+        userId: string
+    ) {
+
+        return this.taskRepository
+            .findByAssignee(
+                userId
+            );
+    }
+
+    async getProjectWorkload(
+        projectId: string
+    ) {
+
+        const tasks =
+            await this.taskRepository
+                .getProjectTasks(
+                    projectId
+                );
+
+        const workload =
+            tasks.reduce(
+                (
+                    acc,
+                    task
+                ) => {
+
+                    if (
+                        !task.assigneeId
+                    ) {
+                        return acc;
+                    }
+
+                    if (
+                        !acc[
+                        task.assigneeId
+                        ]
+                    ) {
+                        acc[
+                            task.assigneeId
+                        ] = 0;
+                    }
+
+                    acc[
+                        task.assigneeId
+                    ]++;
+
+                    return acc;
+
+                },
+                {} as Record<
+                    string,
+                    number
+                >
+            );
+
+        return workload;
     }
 }

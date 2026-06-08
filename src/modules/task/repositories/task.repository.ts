@@ -100,4 +100,62 @@ export class TaskRepository {
             }
         );
     }
+
+    async assignTask(
+        taskId: string,
+        userId: string
+    ): Promise<void> {
+
+        await Task.update(
+            {
+                assigneeId: userId,
+            },
+            {
+                where: {
+                    id: taskId,
+                },
+            }
+        );
+    }
+
+    async unassignTask(
+        taskId: string
+    ): Promise<void> {
+
+        await Task.update(
+            {
+                assigneeId: null,
+            },
+            {
+                where: {
+                    id: taskId,
+                },
+            }
+        );
+    }
+
+    async findByAssignee(
+        userId: string
+    ): Promise<Task[]> {
+
+        return Task.findAll({
+            where: {
+                assigneeId: userId,
+            },
+            order: [
+                ['updatedAt', 'DESC']
+            ],
+        });
+    }
+
+    async getProjectTasks(
+        projectId: string
+    ): Promise<Task[]> {
+
+        return Task.findAll({
+            where: {
+                projectId,
+            },
+        });
+    }
 }
