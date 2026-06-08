@@ -8,5 +8,8 @@ export const TABLE_NAMES = {
   AUDIT_LOGS: 'audit_logs',
   ORGANIZATIONS: 'organizations',
   ORGANIZATION_MEMBERS: 'organization_members',
-  ORGANIZATION_INVITATIONS: 'organization_invitations'
+  ORGANIZATION_INVITATIONS: 'organization_invitations',
+  PROJECTS: 'projects',
+  SPRINTS: 'sprints',
+  TASKS: 'tasks'
 } as const;

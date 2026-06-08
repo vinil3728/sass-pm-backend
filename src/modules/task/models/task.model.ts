@@ -27,8 +27,10 @@ import { TaskPriority }
 import { TaskType }
     from '../enums/task-type.enum';
 
+import { TABLE_NAMES } from '../../../shared/constants/database.constants';
+
 @Table({
-    tableName: 'tasks',
+    tableName: TABLE_NAMES.TASKS,
     timestamps: true,
     paranoid: true,
 })

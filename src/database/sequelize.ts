@@ -15,6 +15,7 @@ import { OrganizationMember } from '../modules/organization/models/organization-
 import { OrganizationInvitation } from '../modules/organization/models/organization-invitation.model';
 import { Project } from '../modules/project/models/project.model';
 import { Sprint } from '../modules/sprint/models/sprint.model';
+import { Task } from '../modules/task/models/task.model';
 
 
 export const sequelize = new Sequelize({
@@ -40,6 +41,7 @@ export const sequelize = new Sequelize({
     OrganizationMember,
     OrganizationInvitation,
     Project,
-    Sprint
+    Sprint,
+    Task
   ]
 });

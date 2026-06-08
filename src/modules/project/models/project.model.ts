@@ -20,9 +20,10 @@ import { ProjectStatus }
     from '../../project/enums/project-status.enum'
 import { Sprint } from '../../sprint/models/sprint.model';
 import { Task } from '../../task/models/task.model';
+import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 
 @Table({
-    tableName: 'projects',
+    tableName: TABLE_NAMES.PROJECTS,
     timestamps: true,
     paranoid: true,
 })

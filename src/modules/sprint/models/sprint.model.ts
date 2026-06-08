@@ -18,9 +18,10 @@ import { Project } from '../../project/models/project.model';
 import { SprintStatus } from '../enums/sprint-status.enum';
 import { Organization } from '../../organization/models/organization.model';
 import { Task } from '../../task/models/task.model';
+import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 
 @Table({
-    tableName: 'sprints',
+    tableName: TABLE_NAMES.SPRINTS,
     timestamps: true,
     paranoid: true,
 })
