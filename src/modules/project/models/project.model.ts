@@ -7,7 +7,8 @@ import {
     Default,
     AllowNull,
     ForeignKey,
-    BelongsTo
+    BelongsTo,
+    HasMany
 } from 'sequelize-typescript';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -17,6 +18,7 @@ import { Organization }
 
 import { ProjectStatus }
     from '../../project/enums/project-status.enum'
+import { Sprint } from '../../sprint/models/sprint.model';
 
 @Table({
     tableName: 'projects',
@@ -73,4 +75,7 @@ export class Project extends Model {
 
     @BelongsTo(() => Organization)
     declare organization: Organization;
+
+    @HasMany(() => Sprint)
+    declare sprints: Sprint[];
 }
