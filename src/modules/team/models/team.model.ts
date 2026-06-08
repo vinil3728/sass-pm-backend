@@ -15,6 +15,7 @@ import { v4 as uuidv4 }
 
 import { Organization }
     from '../../organization/models/organization.model';
+import { ProjectTeam } from '../../project/models/project-team.model';
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 import { TeamMember } from './team-member.model';
 
@@ -45,4 +46,7 @@ export class Team extends Model {
 
     @HasMany(() => TeamMember)
     declare members: TeamMember[];
+
+    @HasMany(() => ProjectTeam)
+    declare projectTeams: ProjectTeam[];
 }

@@ -20,6 +20,7 @@ import { ProjectStatus }
     from '../../project/enums/project-status.enum'
 import { Sprint } from '../../sprint/models/sprint.model';
 import { Task } from '../../task/models/task.model';
+import { ProjectTeam } from '../../project/models/project-team.model';
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 
 @Table({
@@ -89,4 +90,7 @@ export class Project extends Model {
         defaultValue: 0,
     })
     declare nextTaskNumber: number;
+
+    @HasMany(() => ProjectTeam)
+    declare projectTeams: ProjectTeam[];
 }

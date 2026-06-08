@@ -22,6 +22,7 @@ import { TaskAttachment } from '../modules/task/models/task-attachment.model';
 import { Notification } from '../modules/notification/models/notification.model';
 import { Team } from '../modules/team/models/team.model';
 import { TeamMember } from '../modules/team/models/team-member.model'
+import { ProjectTeam } from '../modules/project/models/project-team.model';
 
 export const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -53,6 +54,7 @@ export const sequelize = new Sequelize({
     TaskAttachment,
     Notification,
     Team,
-    TeamMember
+    TeamMember,
+    ProjectTeam
   ]
 });

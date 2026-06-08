@@ -19,6 +19,6 @@ export const TABLE_NAMES = {
   TASK_ATTACHMENTS: 'task_attachments',
   NOTIFICATIONS: 'notifications',
   TEAMS: 'teams',
-  TEAM_MEMBERS: 'team_members'
-
+  TEAM_MEMBERS: 'team_members',
+  PROJECT_TEAMS: 'project_teams'
 } as const;
