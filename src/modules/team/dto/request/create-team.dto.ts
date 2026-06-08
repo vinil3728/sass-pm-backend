@@ -1,0 +1,16 @@
+import {
+    IsNotEmpty,
+    IsString,
+    MaxLength
+} from 'class-validator';
+
+export class CreateTeamDto {
+
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(100)
+    name!: string;
+
+    @IsString()
+    description!: string;
+}

@@ -14,6 +14,7 @@ import { OrganizationMember } from './organization-member.model';
 import { OrganizationInvitation } from './organization-invitation.model';
 import { TABLE_NAMES } from '../../../shared/constants/database.constants';
 import { Project } from '../../project/models/project.model';
+import { Team } from '../../team/models/team.model';
 
 @Table({
     tableName: TABLE_NAMES.ORGANIZATIONS,
@@ -55,4 +56,7 @@ export class Organization extends Model {
 
     @HasMany(() => Project)
     declare projects: Project[];
+
+    @HasMany(() => Team)
+    declare teams: Team[];
 }
