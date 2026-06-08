@@ -6,6 +6,7 @@ import routes from './routes';
 import { errorHandler } from './shared/middleware/error-handler';
 
 import authRoutes from './modules/auth/routes/auth.routes';
+import organizationRoutes from './modules/organization/routes/organization.routes';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/v1', routes);
 app.use('/api/auth', authRoutes);
+app.use('/api/organizations', organizationRoutes);
 
 app.use(errorHandler);
 
