@@ -91,7 +91,8 @@ export class TaskController {
             await this.taskService
                 .updateStatus(
                     req.params.taskId as string,
-                    req.body.status
+                    req.body.status,
+                    req.body.userId
                 );
 
         return res.status(200).json({

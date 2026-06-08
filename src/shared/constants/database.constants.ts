@@ -17,5 +17,5 @@ export const TABLE_NAMES = {
   TASK_COMMENTS: 'task_comments',
   TASK_ACTIVITIES: 'task_activities',
   TASK_ATTACHMENTS: 'task_attachments',
-
+  NOTIFICATIONS: 'notifications'
 } as const;

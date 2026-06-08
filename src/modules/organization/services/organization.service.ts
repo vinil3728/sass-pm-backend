@@ -7,6 +7,7 @@ import { SlugUtil } from '../../../shared/utils/slug.util';
 import { HashUtil } from '../../../shared/utils/security/hash.util';
 import { InvitationTokenUtil } from '../../../shared/utils/invitation-token.util';
 import { OrganizationInvitationRepository } from '../repositories/organization-invitation.repository';
+import { NotificationType } from '../../notification/enums/notification-type.enum';
 
 export class OrganizationService {
     constructor(

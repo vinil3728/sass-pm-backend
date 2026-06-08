@@ -1,0 +1,14 @@
+export enum NotificationType {
+
+    TASK_ASSIGNED =
+    'TASK_ASSIGNED',
+
+    TASK_COMMENT =
+    'TASK_COMMENT',
+
+    TASK_STATUS_CHANGED =
+    'TASK_STATUS_CHANGED',
+
+    ORGANIZATION_INVITATION =
+    'ORGANIZATION_INVITATION',
+}

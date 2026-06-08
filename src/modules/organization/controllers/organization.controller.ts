@@ -3,6 +3,7 @@ import { Response } from 'express';
 import { OrganizationService } from '../services/organization.service';
 
 import { AuthRequest } from '../../../shared/middleware/auth.middleware';
+import { NotificationType } from '../../notification/enums/notification-type.enum';
 
 export class OrganizationController {
     private readonly organizationService =

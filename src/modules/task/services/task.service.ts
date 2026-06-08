@@ -1,3 +1,5 @@
+import { NotificationType } from '../../notification/enums/notification-type.enum';
+import { NotificationService } from '../../notification/services/notification.service';
 import { OrganizationMemberRepository } from '../../organization/repositories/organization-member.repository';
 import { ProjectRepository } from '../../project/repositories/project.repository';
 import { CreateTaskDto } from '../dto/request/create-task.dto';
@@ -5,6 +7,7 @@ import { GetTasksQueryDto } from '../dto/request/get-tasks-query.dto';
 import { TaskStatus } from '../enums/task-status.enum';
 import { TaskRepository } from '../repositories/task.repository';
 import { TaskStatusTransition } from '../utils/task-status-transition';
+import { TaskActivityService } from './task-activity.service';
 
 export class TaskService {
 
@@ -16,7 +19,13 @@ export class TaskService {
             new ProjectRepository(),
 
         private readonly memberRepository =
-            new OrganizationMemberRepository()
+            new OrganizationMemberRepository(),
+
+        private readonly notificationService =
+            new NotificationService(),
+
+        private readonly activityService =
+            new TaskActivityService()
     ) { }
 
     async createTask(
@@ -182,7 +191,8 @@ export class TaskService {
 
     async updateStatus(
         taskId: string,
-        targetStatus: TaskStatus
+        targetStatus: TaskStatus,
+        currentUserId: string
     ) {
 
         const task =
@@ -212,6 +222,28 @@ export class TaskService {
                 taskId,
                 targetStatus
             );
+
+        if (
+            task.assigneeId &&
+            task.assigneeId !== currentUserId
+        ) {
+
+            await this.notificationService
+                .createNotification(
+
+                    task.assigneeId,
+
+                    NotificationType.TASK_STATUS_CHANGED,
+
+                    'Task Updated',
+
+                    `Task moved to ${targetStatus}`,
+
+                    {
+                        taskId,
+                    }
+                );
+        }
 
         return {
             success: true,
@@ -250,6 +282,23 @@ export class TaskService {
             .assignTask(
                 taskId,
                 userId
+            );
+
+        await this.activityService.log(
+            taskId,
+            userId,
+            'TASK_ASSIGNED'
+        );
+
+        await this.notificationService
+            .createNotification(
+                userId,
+                NotificationType.TASK_ASSIGNED,
+                'Task Assigned',
+                `You have been assigned a task`,
+                {
+                    taskId,
+                }
             );
 
         return {

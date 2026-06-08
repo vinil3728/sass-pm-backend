@@ -19,6 +19,7 @@ import { Task } from '../modules/task/models/task.model';
 import { TaskComment } from '../modules/task/models/task-comment.model';
 import { TaskActivity } from '../modules/task/models/task-activity.model';
 import { TaskAttachment } from '../modules/task/models/task-attachment.model';
+import { Notification } from '../modules/notification/models/notification.model';
 
 
 export const sequelize = new Sequelize({
@@ -48,6 +49,7 @@ export const sequelize = new Sequelize({
     Task,
     TaskComment,
     TaskActivity,
-    TaskAttachment
+    TaskAttachment,
+    Notification
   ]
 });
