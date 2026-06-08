@@ -8,6 +8,7 @@ import { errorHandler } from './shared/middleware/error-handler';
 import authRoutes from './modules/auth/routes/auth.routes';
 import organizationRoutes from './modules/organization/routes/organization.routes';
 import projectRoutes from './modules/project/routes/project.routes';
+import sprintRoutes from './modules/sprint/routes/sprint.routes';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/v1', routes);
 app.use('/api/auth', authRoutes);
 app.use('/api/organizations', organizationRoutes);
 app.use('/api', projectRoutes);
+app.use('/api', sprintRoutes);
 
 app.use(errorHandler);
 

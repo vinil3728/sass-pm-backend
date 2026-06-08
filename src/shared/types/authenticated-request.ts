@@ -6,6 +6,8 @@ import { Project }
 import { OrganizationMember }
     from '../../modules/organization/models/organization-member.model';
 
+import { Sprint } from '../../modules/sprint/models/sprint.model';
+
 export interface AuthenticatedRequest
     extends Request {
 
@@ -17,4 +19,6 @@ export interface AuthenticatedRequest
     membership?: OrganizationMember;
 
     project?: Project;
+
+    sprint?: Sprint;
 }
