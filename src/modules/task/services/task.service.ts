@@ -1,8 +1,8 @@
 import { ProjectRepository } from '../../project/repositories/project.repository';
 import { CreateTaskDto } from '../dto/request/create-task.dto';
 import { TaskStatus } from '../enums/task-status.enum';
-import { TaskRepository }
-    from '../repositories/task.repository';
+import { TaskRepository } from '../repositories/task.repository';
+import { TaskStatusTransition } from '../utils/task-status-transition';
 
 export class TaskService {
 
@@ -147,6 +147,44 @@ export class TaskService {
                     t.status ===
                     TaskStatus.DONE
             ),
+        };
+    }
+
+    async updateStatus(
+        taskId: string,
+        targetStatus: TaskStatus
+    ) {
+
+        const task =
+            await this.taskRepository
+                .findById(taskId);
+
+        if (!task) {
+            throw new Error(
+                'Task not found'
+            );
+        }
+
+        const allowed =
+            TaskStatusTransition.canMove(
+                task.status,
+                targetStatus
+            );
+
+        if (!allowed) {
+            throw new Error(
+                `Cannot move task from ${task.status} to ${targetStatus}`
+            );
+        }
+
+        await this.taskRepository
+            .updateStatus(
+                taskId,
+                targetStatus
+            );
+
+        return {
+            success: true,
         };
     }
 }

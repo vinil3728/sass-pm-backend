@@ -1,3 +1,4 @@
+import { TaskStatus } from '../enums/task-status.enum';
 import { Task } from '../models/task.model';
 
 export class TaskRepository {
@@ -83,5 +84,20 @@ export class TaskRepository {
                 },
             ],
         });
+    }
+
+    async updateStatus(
+        taskId: string,
+        status: TaskStatus
+    ): Promise<void> {
+
+        await Task.update(
+            { status },
+            {
+                where: {
+                    id: taskId,
+                },
+            }
+        );
     }
 }

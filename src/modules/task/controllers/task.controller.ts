@@ -78,4 +78,22 @@ export class TaskController {
             data: result,
         });
     };
+
+    updateStatus = async (
+        req: AuthenticatedRequest,
+        res: Response
+    ) => {
+
+        const result =
+            await this.taskService
+                .updateStatus(
+                    req.params.taskId as string,
+                    req.body.status
+                );
+
+        return res.status(200).json({
+            success: true,
+            data: result,
+        });
+    };
 }

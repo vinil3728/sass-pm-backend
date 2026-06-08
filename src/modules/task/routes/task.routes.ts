@@ -22,6 +22,7 @@ import { validationMiddleware }
 import { CreateTaskDto }
     from '../dto/request/create-task.dto';
 import { taskAccess } from '../middleware/task-access.middleware';
+import { UpdateTaskStatusDto } from '../dto/request/update-task-status.dto';
 
 const router = Router();
 
@@ -76,6 +77,20 @@ router.get(
   projectAccess,
 
   controller.getKanbanBoard
+);
+
+router.patch(
+  '/tasks/:taskId/status',
+
+  authMiddleware,
+
+  taskAccess,
+
+  validationMiddleware(
+    UpdateTaskStatusDto
+  ),
+
+  controller.updateStatus
 );
 
 export default router;
